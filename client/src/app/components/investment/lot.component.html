@@ -1,0 +1,35 @@
+<form [formGroup]="lotForm" (ngSubmit)="submitLotForm()">
+    <div *ngIf="lotArray.length>0;else nolots">        
+        <div formArrayName="lots">
+            <div class="grid grid-cols-7 gap-1 sm:grid-cols-11 items-center" *ngFor="let t of lotArray.controls; let i = index" [formGroupName]="i">                
+                <Button class="col-span-1 text-md mt-1 lg:text-lg" type="button" (click)="deleteLot(i)">
+                    <fa-icon [icon]="faCircleMinus" style="color:red"></fa-icon>  
+                </Button>
+                <input class="col-span-2 bg-gradient-to-b from-purple-100 to-white text-gray-900 rounded-sm text-center text-xs mt-1 lg:text-lg" type="date" formControlName="date"/>
+                <input class="col-span-2 bg-gradient-to-b from-purple-100 to-white text-gray-900 rounded-sm text-center text-xs mt-1 lg:text-lg" type="number" formControlName="shares"/>
+                <input class="col-span-2 bg-gradient-to-b from-purple-100 to-white text-gray-900 rounded-sm text-center text-xs mt-1 lg:text-lg" type="number" formControlName="costPerShare"/>
+                <div class="hidden mt-1 text-xs text-center sm:block sm:col-span-2 lg:text-lg">{{calculateMarketValue(t.value.shares) | number : "1.2-2"}}</div>
+                <div class="hidden mt-1 text-xs text-center sm:block sm:col-span-2 lg:text-lg" 
+                    [class.text-lime-600]="calculateTotalGain(t.value.shares,t.value.costPerShare)>0"
+                    [class.text-rose-600]="calculateTotalGain(t.value.shares,t.value.costPerShare)<0">
+                    <span *ngIf="calculateTotalGain(t.value.shares,t.value.costPerShare)>0">+</span>
+                    {{calculateTotalGain(t.value.shares,t.value.costPerShare) |number:'1.2-2'}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="grid grid-cols-7 gap-1 sm:grid-cols-11">
+        <button class="col-span-1 text-md text-center mt-1 lg:text-lg" type="button" (click)="addLot()">
+            <fa-icon [icon]="faCirclePlus" style="color:#2fc800"></fa-icon>
+        </button>
+        <button class="col-start-6 col-span-2 text-md text-center mt-1 lg:text-lg" type="submit">
+            <fa-icon [icon]="faUpload" style="color:#3B82F6"></fa-icon>
+        </button>
+    </div>
+</form>
+
+<ng-template #nolots>
+    <div class="grid grid-cols-7 gap-1">
+        <h1 class="col-span-7 bg-fuchsia-50 text-gray-900 rounded-lg text-center mb-1 text-xs lg:text-lg" >Add a lot</h1>
+    </div>
+</ng-template>

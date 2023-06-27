@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Moolala</string>
+    <string name="title_activity_main">Moolala</string>
+    <string name="package_name">online.moolala</string>
+    <string name="custom_url_scheme">online.moolala</string>
+</resources>

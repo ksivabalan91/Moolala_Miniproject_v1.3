@@ -1,0 +1,104 @@
+<div class="flex flex-col items-center justify-center">
+  <div>
+    <canvas
+      baseChart
+      [data]="lineChartData"
+      [options]="lineChartOptions"
+      [type]="lineChartType"
+      style="height: 350px; width: 100%"
+    ></canvas>
+  </div>
+  <!-- Date Range Selector -->
+  <ul class="flex">
+    <li (click)="setDateRange(1)">
+      <input
+        type="radio"
+        id="1-month-data"
+        name="data-range"
+        value="1"
+        class="hidden peer"
+      />
+      <label
+        for="1-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border border-purple-600 rounded-l-lg cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">1M</div>
+      </label>
+    </li>
+    <li (click)="setDateRange(3)">
+      <input
+        type="radio"
+        id="3-month-data"
+        name="data-range"
+        value="3"
+        class="hidden peer"
+      />
+      <label
+        for="3-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border-t border-b border-r border-purple-600 cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">3M</div>
+      </label>
+    </li>
+    <li (click)="setDateRange(6)">
+      <input
+        type="radio"
+        id="6-month-data"
+        name="data-range"
+        value="6"
+        class="hidden peer"
+      />
+      <label
+        for="6-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border-t border-b border-r border-purple-600 cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">6M</div>
+      </label>
+    </li>
+    <li (click)="setDateRange(12)">
+      <input
+        type="radio"
+        id="12-month-data"
+        name="data-range"
+        value="12"
+        class="hidden peer"
+      />
+      <label
+        for="12-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border-t border-b border-r border-purple-600 cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">1Y</div>
+      </label>
+    </li>
+    <li (click)="setDateRange(0)">
+      <input
+        type="radio"
+        id="ytd-month-data"
+        name="data-range"
+        value="0"
+        class="hidden peer"
+      />
+      <label
+        for="ytd-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border-t border-b border-purple-600 cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">YTD</div>
+      </label>
+    </li>
+    <li (click)="setDateRange(100)">
+      <input
+        type="radio"
+        id="max-month-data"
+        name="data-range"
+        value="100"
+        class="hidden peer"
+      />
+      <label
+        for="max-month-data"
+        class="inline-flex items-center justify-between w-14 sm:w-20 h-5 text-center text-xs p-3 text-purple-600 bg-fuchsia-50 border border-purple-600 rounded-r-lg cursor-pointerpeer-checked:border-blue-600 peer-checked:text-white peer-checked:bg-purple-600 hover:text-gray-900 hover:bg-cyan-300"
+      >
+        <div class="w-full">MAX</div>
+      </label>
+    </li>
+  </ul>
+</div>

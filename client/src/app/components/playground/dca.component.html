@@ -1,0 +1,296 @@
+<div
+    class="mx-auto p-2 max-w-sm sm:mx-auto sm:p-2 sm:max-w-xl md:mx-auto md:p-2 md:max-w-2xl lg:mx-auto lg:p-2 lg:max-w-5xl xl:mx-auto xl:p-2 xl:max-w-none xl:w-10/12  mt-5">
+
+
+    <div class="flex flex-col justify-center gap-4 lg:flex-row mt-10">
+        <div class="order-2 rounded-lg p-4 shadow-md shadow-blue-100 hover:shadow-blue-300 flex flex-col justify-around text-xs
+        sm:text-base
+        lg:order-1
+        lg:max-w-md
+        xl:max-w-lg
+        2xl:max-w-2xl" *ngIf="showform;else dcaForm">
+            <h1 class="text-center text-xl lg:text-2xl text-blue-600 font-bold font-Noto mb-4">
+                <fa-icon [icon]="faSeedling"></fa-icon>
+                Dollar Cost Averaging Model
+            </h1>
+            <hr>
+            &nbsp;
+            <h2 class="text-center font-bold text-lg text-blue-900">
+                What is the DCA?
+            </h2>
+            <br />
+            <p class="text-justify lg:text-xl text-fuchsia-950">Dollar-cost averaging is a smart investment strategy
+                that allows you to build wealth over time by consistently investing a fixed amount of money at regular
+                intervals, regardless of market conditions.</p><br>
+            <p class="text-justify lg:text-xl text-fuchsia-950">Instead of trying to time the market and predict its ups
+                and downs, dollar-cost averaging takes advantage of market fluctuations by purchasing more shares when
+                prices are low and fewer shares when prices are high.</p><br>
+            <p class="text-justify lg:text-xl text-fuchsia-950">This approach reduces the impact of short-term market
+                volatility and helps smooth out the overall cost of your investments. With dollar-cost averaging, you
+                can take a disciplined and long-term approach to investing, benefiting from the power of compounding and
+                potentially achieving your financial goals.</p><br>
+            <h2 class="text-center font-bold text-lg text-blue-900">
+                What this calculator does
+            </h2>
+            <br />
+            <p class="text-justify lg:text-xl text-fuchsia-950">
+                This calculator helps you visualize and calculate the respective annualized gain or loss of your
+                investment in a stock if you had invested a fixed amount of money at regular intervals, based on actual
+                historical price data.
+            </p><br>
+            <button type="button" (click)="showform = !showform"
+                class=" flex items-center justify-center w-full py-2 bg-orange-500 hover:bg-orange-700 text-white font-semibold rounded-md">
+                Try it out yourself
+                &nbsp;
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+            </button>
+        </div>
+        <ng-template #dcaForm>
+            <form class="order-2 bg-gradient-to-br from-cyan-100 to-orange-200 rounded-lg p-4 shadow-md shadow-blue-100 hover:shadow-blue-300 text-xs
+            sm:text-base
+            lg:order-1
+            lg:max-w-md
+            xl:max-w-lg    
+            2xl:max-w-2xl" [formGroup]="form" (ngSubmit)="submit(lineChart)">
+                <div class="mb-4 text-center text-xl sm:text-2xl font-bold font-Noto text-orange-700">
+                    Try out the DCA model with your own parameters
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="ticker" class="block text-lg lg:text-xl font-semibold text-blue-700">Ticker
+                        Symbol</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">insert valid ticker symbols from the US stock market</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="text" class="rounded-lg form-input p-1 w-full" name="ticker" id="ticker"
+                        placeholder="e.g. tsla" formControlName="ticker">
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="startDate" class="block text-lg lg:text-xl font-semibold text-blue-700">Start
+                        date</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">Investment starting date</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="date" class="rounded-lg form-input p-1 w-full" name="startDate" id="startDate"
+                        formControlName="startDate">
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="endDate" class="block text-lg lg:text-xl font-semibold text-blue-700">End date</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">Investment ending date</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="date" class="rounded-lg form-input p-1 w-full" name="endDate" id="endDate"
+                        formControlName="endDate">
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="investInterval" class="block text-lg lg:text-xl font-semibold text-blue-700">Interval
+                        (Days)</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">Intervals in which stocks are bought in days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="number" class="rounded-lg form-input p-1 w-full" name="investInterval"
+                        id="investInterval" placeholder="e.g. 7, 14, 30 days" formControlName="investInterval">
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="investAmount" class="block text-lg lg:text-xl font-semibold text-blue-700">Amount
+                        (USD)</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">Amount of stock bought during each interval in USD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="number" class="rounded-lg form-input p-1 w-full" name="investAmount" id="investAmount"
+                        placeholder="500" formControlName="investAmount">
+                </div>
+                <div class="flex justify-start mb-1">
+                    <label for="initialAmount" class="block text-lg lg:text-xl font-semibold text-blue-700">Starting
+                        Amount (USD)</label>
+                    &nbsp;
+                    <div class="relative group self-center">
+                        <fa-icon [icon]="faCircleQuestion" class="text-orange-200 hover:text-blue-600"></fa-icon>
+                        <div
+                            class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                            <p class="text-justify">Initial investment amount in USD</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <input type="number" class="rounded-lg form-input p-1 w-full" name="initialAmount"
+                        id="initialAmount" placeholder="0" formControlName="initialAmount">
+                </div>
+                <br>
+                <div class="grid grid-cols-2 gap-3">
+                    <button type="button" (click)="showform=!showform"
+                        class="col-span-1 w-full py-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold rounded-md">Back</button>
+                    <button type="submit"
+                        class="col-span-1 w-full py-2 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-md">Generate
+                        Chart</button>
+                </div>
+            </form>
+        </ng-template>
+        <div class="p-4        
+        lg:order-2
+        xl:max-w-xl    
+        2xl:max-w-2xl" #lineChart>
+            <div *ngIf="switch =='animation'">
+                <ng-lottie [options]="lottieOptions"></ng-lottie>
+            </div>
+            <div *ngIf="switch =='loading'">
+                <ng-lottie [options]="lottieOptions"></ng-lottie>
+            </div>
+            <div *ngIf="switch =='error'">
+                <ng-lottie [options]="lottieOptions"></ng-lottie>
+            </div>
+            <div *ngIf="switch =='chartGenerated'" class="order-2">
+                <app-dca-line-chart [data]="data" [lineChartData]="lineChartData"
+                    [lineChartOptions]="lineChartOptions"></app-dca-line-chart>
+            </div>
+            <div *ngIf="switch =='chartGenerated'">
+                <br>
+                <div class="grid grid-cols-3 p-2 gap-2 text-center font-Noto">
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Annualized return</h1>
+                        <p class="text-xs sm:text-2xl text-bold" [style.color]="annualizedReturn>0?'#84CC16':'#DC2626'">
+                            {{annualizedReturn > 0 ? '+' : ''}}{{annualizedReturn|percent}}</p>
+                    </div>
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Total change</h1>
+                        <p class="text-xs sm:text-2xl text-bold" [style.color]="totalChange>0?'#84CC16':'#DC2626'">
+                            {{totalChange > 0 ? '+' : ''}}{{totalChange|percent}}</p>
+                    </div>
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Total profit/loss</h1>
+                        <p class="text-xs sm:text-2xl text-bold" [style.color]="totalReturn>0?'#84CC16':'#DC2626'">
+                            {{totalReturn > 0 ? '+' : ''}}{{totalReturn|currency}}</p>
+                    </div>
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Total shares</h1>
+                        <p class="text-xs sm:text-2xl text-bold">{{totalShares|number : '1.2-3'}}</p>
+                    </div>
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Cost/share</h1>
+                        <p class="text-xs sm:text-2xl text-bold">{{avgCost|currency}}</p>
+                    </div>
+                    <div
+                        class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Current Price</h1>
+                        <p class="text-xs sm:text-2xl text-bold">{{currentPrice|currency}}</p>
+                    </div>
+                    <div class="col-span-3 text-justify text-xs sm:text-base p-2">
+                        If you had invested 
+                        <span class="text-orange-500 underline">{{form.value.investAmount|currency}}</span> every 
+                        <span class="text-blue-500 underline">{{form.value.investInterval}} days</span> from 
+                        <span class="text-blue-500 underline">{{form.value.startDate| date}}</span> to 
+                        <span class="text-blue-500 underline">{{form.value.endDate| date}}</span> with 
+                        <span class="text-orange-500 underline">{{form.value.initialAmount|currency}}</span> initial investment in 
+                        <span class="text-purple-600 underline">{{form.value.ticker|uppercase}}</span> stock. You would own a total of
+                        <span class="text-orange-500 underline">{{totalShares|number : '1.2-3'}}</span> shares at an average price of
+                        <span class="text-orange-500 underline">{{avgCost|currency}}</span> per share.
+                        <br><br>
+                        At the current stock price of
+                        <span class="text-orange-500 underline">{{currentPrice|currency}}</span> per share you would you have
+                        <span>{{totalReturn > 0 ? 'made ' : 'lost '}}</span><span class="underline" [style.color]="totalReturn>0?'#84CC16':'#DC2626'">{{totalReturn|currency}}</span> on your total investment of 
+                        <span class="text-orange-500 underline">{{totalCost|currency}}</span>. That is an annualized return of 
+                        <span class="underline" [style.color]="annualizedReturn>0?'#84CC16':'#DC2626'">{{annualizedReturn|percent}}</span>.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <hr />
+    <br>
+    <br>
+    <div class="text-lg text-center
+sm:text-lg sm:text-start sm:mx-1
+md:text-xl md:text-start md:mx-1
+lg:text-2xl lg:text-start lg:mx-1
+font-Noto">Referral Links</div>
+    <br />
+    <div class="flex flex-wrap gap-1 justify-center md:justify-start items-center">
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://ibkr.com/referral/k961">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Interactive Brokers</div>
+            <img class="rounded-lg" src="assets/referrals/ibkr512.png" alt="IKBR" style="width: 50px;">
+        </a>
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://www.webull.com.sg/s/uIYsgGFov61dR0XINd">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Webull</div>
+            <img class="rounded-lg" class="shrink" src="assets/referrals/webull512.png" alt="Webull"
+                style="width: 50px;">
+        </a>
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://www.tigerbrokers.com.sg/activity/forapp/welcome/sgp.html?is_invite=true&utm_campaign=AC1665389958774ybmreB&adcode=AC1665389958774ybmreB&utm_medium=telegram&skin=2&edition=fundamental&shareID=0e1d790615f51137018dc27205f3f4f3&platform=android&account_display=standard&original_module=my_profile_activity&invite=&lang=en_US&utm_source=invite">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Tiger Brokers</div>
+            <img class="rounded-lg" src="assets/referrals/tigerbrokers512.png" alt="Tiger Brokers" style="width: 50px;">
+        </a>
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://invite-code.moomoo.com/share?code=GPZDSYGM&inviter=104322956&global_content=%7B%7D&channel=4&subchannel=">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Moo Moo</div>
+            <img class="rounded-lg" src="assets/referrals/moomoo512.png" alt="Moo Moo" style="width: 50px;">
+        </a>
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://www.syfe.com/invite/wealth/SRPS9ZX8Q">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Syfe</div>
+            <img class="rounded-lg" src="assets/referrals/syfe512.jpeg" alt="Syfe" style="width: 50px;">
+        </a>
+        <!-- <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://singlife.com/en">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Singlife</div>
+            <img class="rounded-lg" src="assets/referrals/singlife512.png" alt="Singlife" style="width: 50px;">
+        </a> -->
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://endowus.com/invite?code=4D3QJ">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">EndowUS</div>
+            <img class="rounded-lg" src="assets/referrals/endowus512.png" alt="EndowUS" style="width: 50px;">
+        </a>
+        <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+            href="https://www.stashaway.sg/referrals/sivabalkxrv9">
+            <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Stashaway</div>
+            <img class="rounded-lg" src="assets/referrals/stashaway512.jpg" alt="Stashaway" style="width: 50px;">
+        </a>
+    </div>
+    <br>
+    <hr />
+    <br>
+</div>

@@ -1,0 +1,638 @@
+<div
+  class="mx-auto p-2 max-w-sm sm:mx-auto sm:p-2 sm:max-w-xl md:mx-auto md:p-2 md:max-w-2xl lg:mx-auto lg:p-2 lg:max-w-5xl xl:mx-auto xl:p-2 xl:max-w-none xl:w-10/12  mt-5">
+
+  <div class="flex flex-col justify-center items-start gap-4 lg:flex-row mt-10">
+    <div
+      class="order-2 rounded-lg p-4 shadow-md shadow-blue-100 hover:shadow-blue-300 flex flex-col justify-around text-xs sm:text-base lg:order-1 lg:max-w-md xl:max-w-lg 2xl:max-w-2xl"
+      *ngIf="showform; else dcaForm">
+      <h1 class="text-center text-xl lg:text-2xl text-blue-800 font-bold font-Noto mb-4">
+        <fa-icon [icon]="faFireFlameCurved"></fa-icon>&nbsp;
+        <span class="text-blue-900">Financial Independence / Retire Early (FIRE) Calculator</span>
+      </h1>
+      <hr />
+      &nbsp;
+      <h2 class="text-center font-bold text-lg text-blue-900">
+        What is the FIRE movement?
+      </h2>
+      <br />
+
+      <p class="text-justify lg:text-xl text-blue-950">
+        FIRE (Financial Independence / Retire Early) is a financial milestone
+        where you accumulate enough assets that the returns on your investments
+        can cover your living expenses. It allows you to have complete freedom
+        over your time and eliminates the need to work for income.
+      </p>
+      <br />
+      <h2 class="text-center font-bold text-lg text-blue-900">
+        What this calculator does
+      </h2>
+      <br />
+      <p class="text-justify lg:text-xl text-blue-950">
+        This interactive calculator helps you visualize and calculate the growth
+        of your net worth on your journey to Financial Independence. Simply enter
+        your current age, annual take-home pay, annual spending, and current net
+        worth. The calculator will show you how soon you can reach FIRE and the
+        amount you need to accumulate.
+      </p>
+      <br />
+      <p class="text-justify lg:text-xl text-blue-950">
+        The calculator takes into account your investment rate of return,
+        inflation rate, and safe withdrawal rate (safeWithdrawalRate). The
+        safeWithdrawalRate is the estimated percentage of your net worth you can
+        withdraw each year to cover expenses. A 4% safeWithdrawalRate is commonly
+        recommended for retirement planning.
+      </p>
+      <br />
+      <button type="button" (click)="showform = !showform"
+        class="flex items-center justify-center w-full py-2 bg-blue-900 hover:bg-blue-700 text-white font-semibold rounded-md">
+        Try it out yourself &nbsp;
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+        </svg>
+      </button>
+    </div>
+    <ng-template #dcaForm>
+      <form
+        class="order-2 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg p-4 shadow-md shadow-blue-100 hover:shadow-blue-300 text-xs sm:text-base lg:order-1 lg:max-w-md xl:max-w-lg 2xl:max-w-2xl"
+        [formGroup]="form" (ngSubmit)="submit()">
+        <div class="flex flex-col">
+          <div class="mb-4 text-center text-sm sm:text-2xl font-bold font-Noto text-purple-800">
+            Visualize and calculate how much you need to reach Financial
+            Independence
+          </div>
+          <div class="grid grid-cols-3 gap-2 items-end">
+            <div class="flex justify-start">
+              <label for="currentAge"
+                class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-800">Current age
+              </label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48 justify-center items-center content-center">
+                  <p class="text-justify">Enter your current age</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-start">
+              <label for="annualIncome"
+                class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-800">Annual income</label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                  <p class="text-justify">
+                    This is your current annual take home pay after taxes
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex justify-start">
+              <label for="annualSpending"
+                class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-800">Annual spending</label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 right-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                  <p class="text-justify">This is your current annual spending</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 items-end">
+            <div class="flex">
+              <input type="number" class="text-center rounded-md border border-blue-900 form-input p-1 w-full"
+                name="currentAge" id="currentAge" placeholder="30" formControlName="currentAge" />
+            </div>
+            <div class="flex">
+              <span
+                class="inline-flex items-center px-3 text-sm text-white bg-blue-900 border border-r-0 border-blue-900 rounded-l-md font-bold">$</span>
+              <input type="number"
+                class="text-center rounded-r-md border border-l-0 border-blue-900 form-input p-1 w-full"
+                name="annualIncome" id="annualIncome" formControlName="annualIncome" />
+            </div>
+            <div class="flex">
+              <span
+                class="inline-flex items-center px-3 text-sm text-white bg-blue-900 border border-r-0 border-blue-900 rounded-l-md font-bold">$</span>
+              <input type="number"
+                class="text-center rounded-r-md border border-l-0 border-blue-900 form-input p-1 w-full"
+                name="annualSpending" id="annualSpending" formControlName="annualSpending" />
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 items-end">
+            <div class="flex">
+              <label for="retirementAge"
+                class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-900">Retirement age</label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                  <p class="text-justify">
+                    Change this value to the age at which you would retire and
+                    stop earning an income from your day job
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex">
+              <label for="endAge" class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-900">End
+                age</label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                  <p class="text-justify">
+                    Adjust this value to zoom in/out the graph
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="flex">
+              <label for="retirementAnnualSpending"
+                class="block text-xs p-0.5 md:text-base lg:text-lg font-semibold text-blue-900">Annual
+                withdrawal</label>
+              &nbsp;
+              <div class="relative group self-center">
+                <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                <div
+                  class="hidden group-hover:block absolute top-6 right-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                  <p class="text-justify">
+                    This is your estimated annual spending after you retire
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-3 gap-2 items-end">
+            <div>
+              <input type="number" class="text-center rounded-md border border-blue-900 form-input p-1 w-full"
+                name="retirementAge" id="retirementAge" formControlName="retirementAge" />
+            </div>
+            <div>
+              <input type="number" class="text-center rounded-md border border-blue-900 form-input p-1 w-full"
+                name="endAge" id="endAge" formControlName="endAge" />
+            </div>
+            <div class="flex">
+              <span
+                class="inline-flex items-center px-3 text-sm text-white bg-blue-900 border border-r-0 border-blue-900 rounded-l-md font-bold">$</span>
+              <input type="number"
+                class="text-center rounded-r-md border border-l-0 border-purple-800 form-input p-1 w-full"
+                name="retirementAnnualSpending" id="retirementAnnualSpending"
+                formControlName="retirementAnnualSpending" />
+            </div>
+          </div>
+          <div class="border-b border-purple-300 my-4"></div>
+          <!-- Cash -->
+          <div>
+            <div class="grid grid-cols-3 sm:grid-cols-5">
+              <div class="col-span-1 sm:col-span-2">
+                <div class="flex">
+                  <label for="cashValue"
+                    class="block text-xs p-0.5 md:text-base font-semibold text-green-800">Cash</label>
+                  &nbsp;
+                  <div class="relative group self-center">
+                    <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                    <div
+                      class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                      <p class="text-justify">Amount of cash you hold</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <label for="cashAllocation"
+                  class="block text-xs p-0.5 mx-2 md:text-base font-semibold text-green-800">Allocation</label>
+                &nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">Percent of your annual savings you would be placing in each of these assets
+                      annually, they should add up to a total of 100%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-wrap">
+                <label for="cashReturn"
+                  class="block text-xs p-0.5 mx-2 md:text-base font-semibold text-green-800">Returns</label>
+                &nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 right-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">Adjust the slider on the right to set average annual return for each asset.
+                      Set your bank rates or returns on your cash deposits. Historically, the S&P500 has returned 8-10%
+                      annually for stock investments. Set returns for other assets</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 items-center justify-center">
+              <div class="col-span-1 sm:col-span-2">
+                <div class="flex">
+                  <span
+                    class="inline-flex items-center px-3 text-sm text-white bg-green-900 border border-r-0 border-green-900 rounded-l-md font-bold">$</span>
+                  <input type="number"
+                    class="text-center rounded-r-md form-input p-1 w-full border border-l-0 border-green-900"
+                    name="cashValue" id="cashValue" formControlName="cashValue" />
+                </div>
+              </div>
+              <div class="flex">
+                <input id="cashReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-green-700"
+                  formControlName="cashAllocation" [value]="form.value.cashAllocation" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-green-700 border border-l-0 border-green-700 rounded-r-md">%</span>
+              </div>
+              <div class="flex">
+                <input id="cashReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-green-700"
+                  formControlName="cashReturn" [value]="form.value.cashReturn" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-green-700 border border-l-0 border-green-700 rounded-r-md">%</span>
+              </div>
+              <div class="hidden sm:flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-green-800">
+                    0%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-green-800">
+                    4%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="cashReturn" type="range" min="0" max="4" [value]="form.value.cashReturn" step="0.25"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-green-600"
+                    formControlName="cashReturn" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Stocks -->
+          <div>
+            <div>
+              <div class="flex">
+                <label for="stockValue"
+                  class="block text-xs p-0.5 md:text-base font-semibold text-purple-800">Equities</label>&nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">Amount of stocks and investments you hold</p>
+                  </div>
+                </div>
+              </div>
+              <div></div>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 items-center justify-center">
+              <div class="col-span-1 sm:col-span-2">
+                <div class="flex">
+                  <span
+                    class="inline-flex items-center px-3 text-sm text-white bg-purple-900 border border-r-0 border-purple-900 rounded-l-md font-bold">$</span>
+                  <input type="number"
+                    class="text-center rounded-r-md form-input p-1 w-full border border-l-0 border-purple-900"
+                    name="stockValue" id="stockValue" formControlName="stockValue" />
+                </div>
+              </div>
+              <div class="flex">
+                <input id="stockReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-purple-700"
+                  formControlName="stockAllocation" [value]="form.value.stockAllocation" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-purple-700 border border-l-0 border-purple-700 rounded-r-md">%</span>
+              </div>
+              <div class="flex">
+                <input id="stockReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-purple-700"
+                  formControlName="stockReturn" [value]="form.value.stockReturn" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-purple-700 border border-l-0 border-purple-700 rounded-r-md">%</span>
+              </div>
+              <div class="hidden sm:flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-purple-800">
+                    0%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-purple-800">
+                    15%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="stockReturn" type="range" min="0" max="15" [value]="form.value.stockReturn" step="0.5"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-purple-600"
+                    formControlName="stockReturn" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Other Assets -->
+          <div>
+            <div>
+              <div class="flex">
+                <label for="otherAssetValue" class="block text-xs p-0.5 md:text-base font-semibold text-red-800">Other
+                  assets</label>&nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">Other assets investments you may hold, cpf, long term deposits etc.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 sm:grid-cols-5 gap-2 items-center justify-center">
+              <div class="col-span-1 sm:col-span-2">
+                <div class="flex">
+                  <span
+                    class="inline-flex items-center px-3 text-sm text-white bg-red-900 border border-r-0 border-red-900 rounded-l-md font-bold">$</span>
+                  <input type="number"
+                    class="text-center rounded-r-md form-input p-1 w-full border border-l-0 border-red-900"
+                    name="otherAssetValue" id="otherAssetValue" formControlName="otherAssetValue" />
+                </div>
+              </div>
+              <div class="flex">
+                <input id="otherAssetReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-red-700"
+                  formControlName="otherAssetAllocation" [value]="form.value.otherAssetAllocation" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-red-700 border border-l-0 border-red-700 rounded-r-md">%</span>
+              </div>
+              <div class="flex">
+                <input id="otherAssetReturn" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-red-700"
+                  formControlName="otherAssetReturn" [value]="form.value.otherAssetReturn" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-red-700 border border-l-0 border-red-700 rounded-r-md">%</span>
+              </div>
+              <div class="hidden sm:flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-red-800">
+                    0%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-red-800">
+                    10%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="otherAssetReturn" type="range" min="0" max="10" [value]="form.value.otherAssetReturn"
+                    step="0.5"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-red-600"
+                    formControlName="otherAssetReturn" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Inflation and safeWithdrawalRate -->
+          <div class="border-b border-purple-300 my-4"></div>
+          <div>
+            <div class="grid grid-cols-3">
+              <div class="flex">
+                <label for="incomeGrowthRate"
+                  class="block text-xs p-0.5 mx-2 md:text-base lg:text-lg font-semibold text-blue-900">Income growth
+                  rate</label>&nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">This is your annual income growth rate not accounting for inflation</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex">
+                <label for="inflationRate"
+                  class="block text-xs p-0.5 mx-2 md:text-base lg:text-lg font-semibold text-blue-900">Inflation
+                  rate</label>&nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 left-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">This is the average annual inflation rate you expect in the future. This
+                      values is ued to normalize your assets and income worth over time. Historically, the US economy
+                      has experienced an annual average inflation rate of about 2-3%</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex">
+                <label for="safeWithdrawalRate"
+                  class="block text-xs p-0.5 mx-2 md:text-base lg:text-lg font-semibold text-blue-900">Safe withdrawal
+                  rate</label>&nbsp;
+                <div class="relative group self-center">
+                  <fa-icon [icon]="faCircleQuestion" class="text-purple-200 hover:text-cyan-500"></fa-icon>
+                  <div
+                    class="hidden group-hover:block absolute top-6 right-0 bg-gray-700 rounded-lg text-xs text-white p-2 shadow w-48">
+                    <p class="text-justify">Safe withdrawal rate is the percentage of your net worth that you can
+                      withdraw each year in retirement. 4% is widely considered as the recommended rate for retirement
+                      planning based on the Trinity study</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 items-center justify-center">
+              <div class="flex">
+                <input id="incomeGrowthRate" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-blue-900"
+                  formControlName="incomeGrowthRate" [value]="form.value.incomeGrowthRate" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-blue-900 border border-l-0 border-blue-900 rounded-r-md">%</span>
+              </div>
+              <div class="flex">
+                <input id="inflationRate" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-blue-900"
+                  formControlName="inflationRate" [value]="form.value.inflationRate" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-blue-900 border border-l-0 border-blue-900 rounded-r-md">%</span>
+              </div>
+              <div class="flex">
+                <input id="safeWithdrawalRate" type="number"
+                  class="text-center form-input p-1 w-full rounded-l-md border border-blue-900"
+                  formControlName="safeWithdrawalRate" [value]="form.value.safeWithdrawalRate" />
+                <span
+                  class="inline-flex items-center px-2 text-sm text-white bg-blue-900 border border-l-0 border-blue-900 rounded-r-md">%</span>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 items-center justify-center">
+              <div class="flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    0%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    10%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="incomeGrowthRate" type="range" min="0" max="10" [value]="form.value.incomeGrowthRate"
+                    step="0.5"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-blue-900"
+                    formControlName="incomeGrowthRate" />
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    2%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    6%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="inflationRate" type="range" min="2" max="6" [value]="form.value.inflationRate" step="0.5"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-blue-900"
+                    formControlName="inflationRate" />
+                </div>
+              </div>
+              <div class="flex flex-col">
+                <div class="flex justify-between mb-1">
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    2%
+                  </div>
+                  <div class="text-xs md:text-base lg:text-xs font-semibold text-blue-900">
+                    6%
+                  </div>
+                </div>
+                <div class="flex w-full mb-4">
+                  <input id="safeWithdrawalRate" type="range" min="2" max="6" [value]="form.value.safeWithdrawalRate"
+                    step="0.5"
+                    class="w-full h-1 bg-white rounded-lg appearance-none cursor-pointer my-auto accent-blue-900"
+                    formControlName="safeWithdrawalRate" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <br />
+          <div class="grid grid-cols-1 gap-3">
+            <button type="button" (click)="showform = !showform"
+              class="col-span-1 w-full py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md">
+              Back
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <div class="p-4 lg:order-2 lg:max-w-lg xl:max-w-xl 2xl:max-w-2xl">
+      <div class="" *ngIf="switch == 'animation'">
+        <ng-lottie [options]="lottieOptions"></ng-lottie>
+      </div>
+      <!-- Chart -->
+      <div *ngIf="switch == 'chartGenerated'" class="order-2">
+        <app-dca-line-chart [data]="data" [lineChartData]="lineChartData"
+          [lineChartOptions]="lineChartOptions"></app-dca-line-chart>
+      </div>
+      <div *ngIf="switch == 'chartGenerated'">
+        <br />
+        <div class="grid grid-cols-3 p-2 gap-2 text-center font-Noto">
+          <div
+            class="p-2 border rounded-lg shadow shadow-purple-100 hover:shadow-blue-100 flex flex-col justify-between">
+            <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">
+              FIRE Number
+            </h1>
+            <p class="text-xs sm:text-2xl text-bold">$ {{ data[0].fireNumber | number }}</p>
+          </div>
+          <div
+            class="p-2 border rounded-lg shadow shadow-purple-100 hover:shadow-blue-100 flex flex-col justify-between">
+            <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">
+              FIRE Age
+            </h1>
+            <p class="text-xs sm:text-2xl text-bold">{{ fireAge }}</p>
+          </div>
+          <div
+            class="p-2 border rounded-lg shadow shadow-purple-100 hover:shadow-blue-100 flex flex-col justify-between">
+            <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">
+              Years to FIRE
+            </h1>
+            <p class="text-xs sm:text-2xl text-bold">{{ yearsToFire }}</p>
+          </div>
+          <div *ngIf="fireAge; else noRetire" class="col-span-3 text-justify text-xs sm:text-base p-2">
+            <p>
+              To achieve your annual retirement spending of
+              <span class="underline text-blue-800 font-bold">${{form.value.retirementAnnualSpending | number}}</span>
+              at a safe withdrawal rate of
+              <span class="underline text-blue-800 font-bold">{{form.value.safeWithdrawalRate}}%</span>
+              , you would need to accumulate a networth total of
+              <span class="underline text-blue-800 font-bold">${{ data[0].fireNumber | number }}</span>
+              to ensure your funds last for at least another 30 years.
+            </p>&nbsp;
+            <p>
+              Given your annual income and spending you would be able to achieve this FIRE number when you turn
+              <span class="underline text-blue-800 font-bold">{{fireAge}} years old</span>
+              , which is
+              <span class="underline text-blue-800 font-bold">{{ yearsToFire }} years</span>
+              away from now.
+              You can adjust these values in the form above to see how it affects your FIRE number and age.
+            </p>
+          </div>
+          <ng-template #noRetire>
+            <div class="col-span-3 text-start text-xs sm:text-lg p-2">
+              Unfortunately you won't reach FIRE before your entered retirement
+              age of
+              <span class="underline text-blue-800 font-bold">{{ this.form.value.retirementAge }}</span>
+              . Try to cut down on annual expenses or add a couple more years to retirement age to see if you can reach
+              your FIRE goals.
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <hr />
+  <br>
+  <div class="text-lg text-center
+sm:text-lg sm:text-start sm:mx-1
+md:text-xl md:text-start md:mx-1
+lg:text-2xl lg:text-start lg:mx-1
+font-Noto">Affiliate Links</div>
+  <br />
+  <div class="flex flex-wrap gap-1 justify-center md:justify-start items-center">
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://ibkr.com/referral/k961">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Interactive Brokers</div>
+          <img class="rounded-lg" src="assets/referrals/ibkr512.png" alt="IKBR" style="width: 50px;">
+      </a>
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://www.webull.com.sg/s/uIYsgGFov61dR0XINd">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Webull</div>
+          <img class="rounded-lg" class="shrink" src="assets/referrals/webull512.png" alt="Webull"
+              style="width: 50px;">
+      </a>
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://www.tigerbrokers.com.sg/activity/forapp/welcome/sgp.html?is_invite=true&utm_campaign=AC1665389958774ybmreB&adcode=AC1665389958774ybmreB&utm_medium=telegram&skin=2&edition=fundamental&shareID=0e1d790615f51137018dc27205f3f4f3&platform=android&account_display=standard&original_module=my_profile_activity&invite=&lang=en_US&utm_source=invite">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Tiger Brokers</div>
+          <img class="rounded-lg" src="assets/referrals/tigerbrokers512.png" alt="Tiger Brokers" style="width: 50px;">
+      </a>
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://invite-code.moomoo.com/share?code=GPZDSYGM&inviter=104322956&global_content=%7B%7D&channel=4&subchannel=">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Moo Moo</div>
+          <img class="rounded-lg" src="assets/referrals/moomoo512.png" alt="Moo Moo" style="width: 50px;">
+      </a>
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://www.syfe.com/invite/wealth/SRPS9ZX8Q">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Syfe</div>
+          <img class="rounded-lg" src="assets/referrals/syfe512.jpeg" alt="Syfe" style="width: 50px;">
+      </a>
+      <!-- <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://singlife.com/en">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Singlife</div>
+          <img class="rounded-lg" src="assets/referrals/singlife512.png" alt="Singlife" style="width: 50px;">
+      </a> -->
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://endowus.com/invite?code=4D3QJ">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">EndowUS</div>
+          <img class="rounded-lg" src="assets/referrals/endowus512.png" alt="EndowUS" style="width: 50px;">
+      </a>
+      <a class="flex hover:cursor-pointer justify-around items-center p-2 h-20 w-40 bg-white border border-cyan-50 rounded-lg shadow hover:shadow-purple-400"
+          href="https://www.stashaway.sg/referrals/sivabalkxrv9">
+          <div class="text-md font-bold tracking-tight" style="color: #1b63d7;">Stashaway</div>
+          <img class="rounded-lg" src="assets/referrals/stashaway512.jpg" alt="Stashaway" style="width: 50px;">
+      </a>
+  </div>
+  <br>
+  <hr />
+  <br>
+</div>

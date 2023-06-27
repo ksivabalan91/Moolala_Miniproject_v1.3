@@ -1,0 +1,265 @@
+<div class="flex flex-col lg:grid lg:grid-cols-7">
+  <!-- Side bar -->  
+  <div class="lg:col-span-2 justify-start gap-1">
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 lg:flex lg:flex-col lg:gap-x-10 p-4 lg:rounded-b-lg w-full h-full bg-gradient-to-t from-cyan-300 to-purple-500 items-center justify-between lg:justify-start">
+      <!-- ! Moon Logo -->
+      <div class="col-span-1 lg:flex lg:flex-col justify-center">
+        <div class="hidden lg:block text-center w-20 h-20 lg:w-32 lg:h-32 xl:w-40 xl:h-40 bg-purple-100 rounded-full mt-5 p-5 mx-auto">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#A855F7" stroke="#A855F7"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>moon</title> <g id="moon"> <circle cx="13.5" cy="13.5" r="2.5" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></circle> <line x1="52" y1="39" x2="52" y2="41" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></line> <line x1="52" y1="45" x2="52" y2="47" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></line> <line x1="48" y1="43" x2="50" y2="43" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></line> <line x1="54" y1="43" x2="56" y2="43" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></line> <circle cx="50.984" cy="52.603" r="1.069"></circle> <path d="M29.716,25.3A17.98,17.98,0,0,0,9.892,29.69a2.983,2.983,0,0,1-3.3,4.942A18,18,0,1,0,41,42" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></path> <path d="M39.831,35.6A18.048,18.048,0,0,0,33.5,27.376" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></path> <path d="M33.223,44.322a5,5,0,1,0-1.156,6.627" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></path> <path d="M33.735,48.612A5,5,0,0,0,34,47" style="fill:#A855F7;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></path> <circle cx="16" cy="48" r="2" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></circle> <circle cx="21" cy="32" r="3" style="fill:none"></circle> <path d="M24,32a3,3,0,1,0-3,3" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></path> <rect x="30" y="7" width="3" height="30" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></rect> <polyline points="43 24.391 43 28 58 28 58 13 50.5 13" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></polyline> <polyline points="33.496 24 50 24 50 9 33.496 9" style="fill:none;stroke:#A855F7;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px"></polyline> <line x1="58" y1="18" x2="50" y2="18" style="fill:none;stroke:#A855F7;stroke-linejoin:round;stroke-width:2px"></line> <line x1="58" y1="23" x2="50" y2="23" style="fill:none;stroke:#A855F7;stroke-linejoin:round;stroke-width:2px"></line> <line x1="50" y1="14" x2="33" y2="14" style="fill:none;stroke:#A855F7;stroke-linejoin:round;stroke-width:2px"></line> <line x1="50" y1="19" x2="33" y2="19" style="fill:none;stroke:#A855F7;stroke-linejoin:round;stroke-width:2px"></line> </g> </g></svg>        
+          <div class="lg:hidden w-full text-md text-center text-white mt-5">{{msg}} , {{username|titlecase}}</div>
+        </div>
+        <div class="w-full text-xl sm:text-3xl xl:text-5xl text-center text-white sm:mt-5 xl:mt-10">{{time | date:'mediumTime'}}</div>
+        <div class="w-full text-xl sm:text-2xl xl:text-3xl text-center text-white sm:mt-5 xl:mt-10">{{msg}}</div>
+        <div class="w-full text-xl sm:text-2xl xl:text-3xl text-center text-white">{{username|titlecase}}</div>
+      <br>
+      </div>
+      <!-- ! account overview -->
+      <div class="col-span-1 lg:flex lg:flex-col bg-white bg-opacity-20 p-5 lg:p-10 pt-2 rounded-2xl sm:w-full lg:mb-4" *ngIf="portfolioList.length!=0;else emptyaccount">
+        <h1 class="text-center text-bold text-sm sm:text-lg xl:text-2xl text-Noto lg:mb-2 underline underline-offset-2 ">Account Overview</h1>          
+        <div class="flex flex-wrap justify-between font-Noto font-bold">
+          <h1 class="text-xs sm:text-md xl:text-lg">Portfolios:</h1>
+          <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">{{portfolioList.length | spaceDelimiterRound}}</h1>
+        </div>
+        <div class="flex flex-wrap justify-between font-Noto font-bold">
+          <h1 class="text-xs sm:text-md xl:text-lg">Total Networth:</h1>
+          <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">$ {{netValue | spaceDelimiterRound}}</h1>
+        </div>
+        <div class="flex flex-wrap justify-between font-Noto font-bold">
+          <h1 class="text-xs sm:text-md xl:text-lg">Total Invested:</h1>
+          <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">$ {{netValue - totalGain | spaceDelimiterRound}}</h1>
+        </div>
+        <div class="flex flex-wrap justify-between font-Noto font-bold">
+          <h1 class="text-xs sm:text-md xl:text-lg">Total Gain:</h1>
+          <h1 class="text-xs sm:text-md xl:text-xl" [style.color]="totalGain>0?'darkgreen':'darkred'">
+            {{ totalGain > 0 ? '+' : '' }}{{ totalGain | number : "1.0-0" }}
+          </h1>
+        </div>
+        <div class="flex flex-wrap justify-between font-Noto font-bold">
+          <h1 class="text-xs sm:text-md xl:text-lg">% Gain:</h1>
+          <h1 class="text-xs sm:text-md xl:text-xl" [style.color]="totalGain>0?'darkgreen':'darkred'">
+            <span class="text-xs sm:text-md xl:text-xl"> {{ totalGainPercent | percent }} </span>
+          </h1>
+        </div>
+      </div>
+      <!-- ! empty portfolio template -->
+      <ng-template #emptyaccount>
+        <div class="col-span-1 lg:flex lg:flex-col bg-white bg-opacity-20 p-5 lg:p-10 pt-2 rounded-2xl sm:w-full lg:mb-4">
+          <h1 class="text-center text-bold text-sm sm:text-lg xl:text-2xl text-Noto lg:mb-2 underline underline-offset-2 ">Account Overview</h1>          
+          <div class="flex flex-wrap justify-between font-Noto font-bold">
+            <h1 class="text-xs sm:text-md xl:text-lg">Portfolios:</h1>
+            <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">0</h1>
+          </div>
+          <div class="flex flex-wrap justify-between font-Noto font-bold">
+            <h1 class="text-xs sm:text-md xl:text-lg">Total Networth:</h1>
+            <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">0</h1>
+          </div>
+          <div class="flex flex-wrap justify-between font-Noto font-bold">
+            <h1 class="text-xs sm:text-md xl:text-lg">Total Invested:</h1>
+            <h1 class="text-purple-700 text-xs sm:text-md xl:text-xl">0</h1>
+          </div>
+          <div class="flex flex-wrap justify-between font-Noto font-bold">
+            <h1 class="text-xs sm:text-md xl:text-lg">Total Gain:</h1>
+            <h1 class="text-xs sm:text-md xl:text-xl">0</h1>
+          </div>
+          <div class="flex flex-wrap justify-between font-Noto font-bold">
+            <h1 class="text-xs sm:text-md xl:text-lg">% Gain:</h1>
+            <h1 class="text-xs sm:text-md xl:text-xl">
+              <span class="text-xs sm:text-md xl:text-xl"> 0 </span>
+            </h1>
+          </div>
+        </div>
+      </ng-template>
+      <!-- ! download and edit ICONs -->
+      <div class="hidden lg:flex justify-start flex-wrap">
+        <button
+            type="button"
+            class="ml-3 text-purple-950 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex flex-col items-center" [routerLink]="['/portfolios']"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32l8.4-8.4z" />
+            <path d="M5.25 5.25a3 3 0 00-3 3v10.5a3 3 0 003 3h10.5a3 3 0 003-3V13.5a.75.75 0 00-1.5 0v5.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5V8.25a1.5 1.5 0 011.5-1.5h5.25a.75.75 0 000-1.5H5.25z" />
+          </svg>          
+          <span> Portfolios</span>
+        </button>
+        <button
+            type="button"
+            class="ml-3 text-purple-950 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex flex-col items-center" (click)="exportCSV()"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path fill-rule="evenodd" d="M12 2.25a.75.75 0 01.75.75v11.69l3.22-3.22a.75.75 0 111.06 1.06l-4.5 4.5a.75.75 0 01-1.06 0l-4.5-4.5a.75.75 0 111.06-1.06l3.22 3.22V3a.75.75 0 01.75-.75zm-9 13.5a.75.75 0 01.75.75v2.25a1.5 1.5 0 001.5 1.5h13.5a1.5 1.5 0 001.5-1.5V16.5a.75.75 0 011.5 0v2.25a3 3 0 01-3 3H5.25a3 3 0 01-3-3V16.5a.75.75 0 01.75-.75z" clip-rule="evenodd" />
+          </svg>          
+          <span> CSV </span>
+        </button>
+        <!-- <button
+            type="button"
+            class="ml-3 text-purple-950 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex flex-col items-center" [routerLink]="['/dca']"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path fill-rule="evenodd" d="M2.25 2.25a.75.75 0 000 1.5H3v10.5a3 3 0 003 3h1.21l-1.172 3.513a.75.75 0 001.424.474l.329-.987h8.418l.33.987a.75.75 0 001.422-.474l-1.17-3.513H18a3 3 0 003-3V3.75h.75a.75.75 0 000-1.5H2.25zm6.54 15h6.42l.5 1.5H8.29l.5-1.5zm8.085-8.995a.75.75 0 10-.75-1.299 12.81 12.81 0 00-3.558 3.05L11.03 8.47a.75.75 0 00-1.06 0l-3 3a.75.75 0 101.06 1.06l2.47-2.47 1.617 1.618a.75.75 0 001.146-.102 11.312 11.312 0 013.612-3.321z" clip-rule="evenodd" />
+          </svg>          
+          <span> DCA </span>
+        </button>
+        <button
+            type="button"
+            class="ml-3 text-purple-950 hover:bg-purple-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium flex flex-col items-center" [routerLink]="['/fire']"
+          ><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-10 h-10">
+            <path fill-rule="evenodd" d="M12.963 2.286a.75.75 0 00-1.071-.136 9.742 9.742 0 00-3.539 6.177A7.547 7.547 0 016.648 6.61a.75.75 0 00-1.152-.082A9 9 0 1015.68 4.534a7.46 7.46 0 01-2.717-2.248zM15.75 14.25a3.75 3.75 0 11-7.313-1.172c.628.465 1.35.81 2.133 1a5.99 5.99 0 011.925-3.545 3.75 3.75 0 013.255 3.717z" clip-rule="evenodd" />
+          </svg>
+          <span> FIRE </span>
+        </button>         -->
+      </div>            
+    </div>
+
+  </div>
+  <!-- Main content -->
+  <div class="lg:col-span-5 m-10" *ngIf="portfolioList.length!=0;else newaccount">
+    <div class="flex flex-col">
+      <!-- Portfolio donut charts-->
+      <div class="flex flex-wrap justify-around gap-2">
+        <!-- todo NGFOR loop through all portfolios and generate donut charts -->
+        <div
+          class="p-4 bg-white border border-purple-200 rounded-lg shadow-sm shadow-cyan-100 hover:shadow-purple-400" style="width:600px"
+          *ngFor="let portfolio of portfolioList; let idx = index"
+        >
+        <div class="relative">
+          <a class="absolute top-0 right-0 text-sm text-purple-700 hover:cursor-pointer" (click)="openPortfolio(idx)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+            </svg>                                   
+          </a>
+        </div>
+        <div class="relative">
+          <a class="absolute top-0 left-0 text-sm text-purple-700 hover:cursor-pointer" (click)="changeChart(idx,lineChart)">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mt-1">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941" />
+            </svg>
+                                               
+          </a>
+        </div>
+        <div class="flex flex-col sm:flex-row justify-around">
+            <!-- Donut Chart -->
+            <div class="hover:cursor-pointer w-44 mx-auto">
+                <app-doughnut-chart [portfolio]="portfolio" [showLegend]="false" [showTitle]="true" (donutColors)="setColors($event)"></app-doughnut-chart>                
+            </div>
+            <!-- Portfolio Breakdown -->
+            <div class="flex flex-col items-center gap-1 sm:gap-4 hover:cursor-pointer">
+                <div class="flex items-center gap-2 font-Noto font-bold">
+                  <h1 class="sm:text-base">Portfolio value:</h1>
+                  <h1 class="text-purple-700 text-lg sm:text-xl">$ {{portfolio.netValue|spaceDelimiterRound}}</h1>                   
+                </div>            
+                <div class="flex flex-grow items-start justify-around text-xs sm:text-sm gap-10">
+                    <div class="flex flex-col justify-start ">
+                        <h1 class="font-bold underline lg:text-center">Overview</h1>                        
+                        <div class="flex justify-between gap-2">
+                            <div class="font-Noto text-gray-800 flex-col">
+                                <p class="hidden sm:block">Symbols</p>
+                                <p class="hidden sm:block">Amount Invested</p>
+                                <p class="hidden sm:block">Total Change</p>
+                                <p class="hidden sm:block">% Change</p>
+                                <p class="sm:hidden">Symbols</p>
+                                <p class="sm:hidden">Invested</p>
+                                <p class="sm:hidden">Change($)</p>
+                                <p class="sm:hidden">Change(%)</p>
+                            </div>
+                            <div class="font-bold text-gray-800 flex-col text-end">
+                                <p>{{portfolio.tickers.length}}</p>
+                                <p>$&nbsp;{{portfolio.netValue-portfolio.totalGain|spaceDelimiterRound}}</p>
+                                <p [style.color]="portfolio.totalGain>0?'#84CC16':'#DC2626'">{{portfolio.totalGain > 0 ? '+' : ''}}{{portfolio.totalGain|spaceDelimiterRound}}</p>
+                                <p [style.color]="portfolio.totalGain>0?'#84CC16':'#DC2626'">{{portfolio.totalGain > 0 ? '+' : ''}}{{portfolio.totalGainPercent|percent}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-col justify-start ">
+                        <h1 class="font-bold underline lg:text-center">Top holdings</h1>
+                        <div class="flex flex-col justify-start">
+                            <div class="flex justify-between items-center" *ngFor="let ticker of tickerColors[idx]">
+                              <div class="flex items-center">
+                                <p class="w-2 h-2" [style.background-color]="ticker.color"></p>
+                                &nbsp;
+                                <p class="">{{ticker.ticker}}                                  
+                                </p>
+                              </div>
+                              &nbsp;
+                              <div>
+                                <p class="">({{ticker.percent|percent}})</p>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>                
+        </div>
+      </div><br>
+      <hr><br>
+      <!-- Main networth tracking chart -->
+      <div class="flex flex-wrap justify-evenly">
+        <!-- ! donut -->
+        <div *ngFor="let portfolio of consolidatedPortfolioList" class="relative hover:cursor-pointer flex flex-col" (click)="changeChart(1337,lineChart)">
+          <app-doughnut-chart [portfolio]="portfolio" [showLegend]="true" [showTitle]="true"></app-doughnut-chart>
+            <!-- <a class="absolute text-base font-bold text-purple-700 hover:cursor-pointer" style="top:33%; left:36%">
+              $ {{netValue | spaceDelimiterRound}}                                               
+            </a> -->
+          <div class="flex flex-col">
+            <div class="flex flex-wrap justify-between font-Noto font-bold p-4">
+              <h1 class="text-lg">Total stocks owned:</h1>
+              <h1 class="text-purple-700 text-xl">{{portfolio.tickers.length | spaceDelimiterRound}}</h1>
+            </div>            
+          </div>
+        </div>
+        <!-- ! Line Chart -->
+        <div class="" #lineChart>
+          <app-line-chart [portfolioName]="portfolioName"></app-line-chart>
+        </div>
+      </div><br>
+      <!-- DCA and FIRE cards -->
+      <div class="grid grid-cols-2 gap-5">
+        <a class="col-span-2 lg:col-span-1 p-4 w-12/12 max-w-4xl bg-white border-purple-200 rounded-lg shadow-sm shadow-cyan-100 hover:shadow-purple-400 hover:cursor-pointer" [routerLink]="['/dca']">
+          <div class="flex flex-col sm:flex-row">
+            <div class="flex">
+              <ng-lottie [options]="lottieOptions1" style="width:150px"></ng-lottie>
+            </div>
+            <div class="flex-grow">
+              <h5 class="text-2xl font-bold tracking-tight text-purple-600">DCA Model</h5>&nbsp;&nbsp;&nbsp;
+              <p>Calculate your historical returns if you were to adopt a dollar cost averaging method to your investments</p>
+            </div>
+          </div>
+        </a>
+        <a class="col-span-2 lg:col-span-1 p-4 w-12/12 max-w-4xl bg-white border-purple-200 rounded-lg shadow-sm shadow-cyan-100 hover:shadow-purple-400 hover:cursor-pointer" [routerLink]="['/fire']">
+          <div class="flex flex-col sm:flex-row">
+            <div class="flex">
+              <ng-lottie [options]="lottieOptions2" style="width:150px;"></ng-lottie>
+            </div>
+            <div class="flex-grow">
+              <h5 class="text-2xl font-bold tracking-tight text-purple-600">FIRE</h5>&nbsp;&nbsp;&nbsp;
+              <p>Financial Independance Retire Early: Check out how much you need to have invested by what age to retire early</p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #newaccount>
+  <div class="col-span-5 bg-cyan-50">
+    <div class="flex flex-wrap justify-center items-center lg:mt-44">
+      <ng-lottie [options]="lottieOptions4" style="width:300px" class="flex justify-center items-center"></ng-lottie>
+      <div
+        class="flex flex-col justify-center p-6 text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left"
+      >
+        <h1 class="text-3xl font-bold sm:text-4xl md:text-5xl mb-5">Dashboard<span class="text-violet-400">Empty</span></h1>
+        <h1 class="text-center mb-5"> Please create and save new portfolios to continue. </h1>
+        <a
+            rel="noopener noreferrer"            
+            class="max-w-lg hover:cursor-pointer px-8 py-3 text-lg font-semibold rounded bg-purple-500 text-gray-100 hover:bg-purple-600 text-center mx-auto"
+            routerLink="/portfolios"
+            >Get Started</a
+          >
+      </div>
+    </div>
+  </div>
+</ng-template>
+<section
+  *ngIf="isLoading"
+  class="bg-pink-100 absolute top-0 left-0 h-screen w-full bg-opacity-90"
+> <div class="flex flex-col justify-center items-center mt-60">
+  <ng-lottie [options]="lottieOptions3" style="width:250px" class="flex justify-center items-center"></ng-lottie>
+</div>  
+</section>

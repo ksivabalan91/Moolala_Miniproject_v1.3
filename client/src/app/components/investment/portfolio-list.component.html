@@ -1,0 +1,200 @@
+<div
+    class="mx-auto p-2 max-w-sm sm:mx-auto sm:p-2 sm:max-w-xl md:mx-auto md:p-2 md:max-w-2xl lg:mx-auto lg:p-2 lg:max-w-5xl xl:mx-auto xl:p-2 xl:max-w-none xl:w-10/12  mt-5">
+    <!-- ! Header -->
+    <div>
+        <div class="text-3xl text-center
+    sm:text-4xl sm:text-start sm:mx-1
+    md:text-5xl md:text-start md:mx-1
+    lg:text-5xl lg:text-start lg:mx-1
+    font-DM
+  ">My Portfolios</div>
+        <hr />
+        <br />
+    </div>
+    <div class="grid grid-cols-2
+    sm:grid-cols-3     
+    2xl:grid-cols-4     
+    ">
+        <div class="col-span-1 text-sm font-Noto mx-auto 
+    sm:col-span-1 sm:text-base sm:mx-0
+    md:col-span-1 md:text-lg
+    lg:col-span-1 lg:text-xl
+    ">Net Value:</div>
+        <div class="col-span-1 text-sm font-Noto mx-auto
+    sm:col-span-1 sm:text-base sm:mx-0
+    md:col-span-1 md:text-lg 
+    lg:col-span-1 lg:text-xl 
+    ">Total Gain:</div>
+    </div>
+    <!-- ! Portfolio Cards -->
+    <div *ngIf="portfolioList.length>0 && netValue>0;else noPortfolios">
+        <div class="grid grid-cols-2 
+    sm:grid-cols-3 
+    2xl:grid-cols-4 
+    ">
+            <div class="col-span-1 text-xl mx-auto
+        sm:col-span-1 sm:text-3xl sm:mx-0
+        md:col-span-1 md:text-4xl
+        lg:col-span-1 lg:text-5xl
+        ">
+                $ {{ netValue | number : "1.0-0" }}
+            </div>
+            <div class="col-span-1 text-xl mx-auto
+        sm:col-span-2 sm:text-3xl sm:mx-0
+        md:col-span-2 md:text-4xl  
+        lg:col-span-2 lg:text-5xl
+        " [style.color]="totalGain>0?'#84CC16':'#DC2626'">
+                {{ totalGain > 0 ? '+' : '' }}
+                {{ totalGain | number : "1.0-0" }}
+                <span class="text-lg sm:text-xl md:text-2xl lg:text-3xl"> ({{ totalGainPercent | percent }}) </span>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="flex flex-wrap gap-1 justify-center md:justify-start items-stretch">
+        <div class="p-4 w-80 bg-white border border-purple-200 rounded-lg shadow-sm shadow-cyan-100 hover:shadow-purple-400"
+            *ngFor="let portfolio of portfolioList; let idx = index">
+            <div class="relative">
+                <a class="absolute top-0 right-0 text-sm text-purple-700 hover:cursor-pointer" (click)="openPortfolio(idx)">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mt-1">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15" />
+                  </svg>                                   
+                </a>
+              </div>
+            <div>
+                <app-doughnut-chart [portfolio]="portfolio"></app-doughnut-chart>
+            </div>
+            <br>
+            <div class="flex justify-between">
+                <div class="flex" *ngIf="isEdit[idx];else editPortName">
+                    <a (click)="openPortfolio(idx)" class="hover:cursor-pointer">
+                        <h5 class="mb-2 text-2xl font-bold tracking-tight text-purple-600 hover:underline">
+                            {{portfolio.portfolioName}}</h5>
+                    </a>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="text-gray-200 hover:text-xl hover:text-gray-700" (click)="editPortfolioName(idx)">
+                        <fa-icon [icon]="faPen"></fa-icon> </button>
+                </div>
+                <button class="text-purple-200 hover:text-purple-600" type="button"
+                    (click)="deletePortfolio(idx)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            </div>
+            <div *ngIf="portfolio.tickers.length>0; else noTickers" class="flex justify-between">
+                <div class="mb-3 font-Noto text-gray-800 flex-col">
+                    <p>Symbols</p>
+                    <p>Amount Invested</p>
+                    <p>Market Value</p>
+                    <p>Total Change</p>
+                    <p>% Change</p>
+                </div>
+                <div class="mb-3 font-bold text-gray-800 flex-col text-end">
+                    <p>{{portfolio.tickers.length}}</p>
+                    <p>$&nbsp;{{portfolio.netValue-portfolio.totalGain|spaceDelimiterRound}}</p>
+                    <p>$&nbsp;{{portfolio.netValue|spaceDelimiterRound}}</p>
+                    <p [style.color]="portfolio.totalGain>0?'#84CC16':'#DC2626'">{{portfolio.totalGain > 0 ? '+' :
+                        ''}}{{portfolio.totalGain|spaceDelimiterRound}}</p>
+                    <p [style.color]="portfolio.totalGain>0?'#84CC16':'#DC2626'">{{portfolio.totalGain > 0 ? '+' :
+                        ''}}{{portfolio.totalGainPercent|percent}}</p>
+                </div>
+            </div>
+            <ng-template #editPortName>
+                <div class="flex">
+                    <input type="text"
+                        class="bg-white border border-blue-100 text-blue-600 placeholder-gray-300 text-2xl rounded-lg  w-2/3 p-2.5"
+                        value="{{portfolio.portfolioName}}" [(ngModel)]="newPortfolioNames[idx]">
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="hover:text-xl" (click)="savePortfolioName(idx)"> <fa-icon [icon]="faFloppyDisk"
+                            style="color: #3678e2"></fa-icon> </button>
+                    &nbsp;&nbsp;&nbsp;
+                    <button class="hover:text-xl" (click)="editPortfolioName(idx)"> <fa-icon [icon]="faCancel"
+                            style="color: #e12e12"></fa-icon> </button>
+                </div>
+            </ng-template>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="addPortfolio()"
+            class="p-4 w-80 bg-white border-2 
+    border-r-cyan-300 border-b-cyan-300 border-l-purple-500 border-t-purple-500 border-dashed border-opacity-20 rounded-lg hover:border-r-cyan-500 hover:border-b-cyan-500 hover:border-l-purple-600 hover:border-t-purple-600">
+            <div class="flex flex-col items-stretch">
+                <input type="text"
+                    class="bg-white border border-blue-100 text-blue-600 placeholder-gray-300 text-lg rounded-lg  w-full p-4"
+                    placeholder="Portfolio name" formControlName=portName>
+
+                <p *ngIf="form.touched && form.invalid" class="mt-2 text-sm text-red-600">*Please enter a portfolio name
+                </p>
+                &nbsp;
+                <button class="hover:cursor-pointer" type="submit" [disabled]="form.invalid">
+                    <h5 class="text-2xl font-bold tracking-tight" [style.color]="form.invalid ? '#86A1F8' : '#7E22CE' ">
+                        + Add portfolio</h5>
+                </button>
+            </div>
+        </form>
+    </div>
+    <br>
+    <!-- ! Playground Cards -->
+    <!-- <br>
+<div class="text-lg text-center
+sm:text-lg sm:text-start sm:mx-1
+md:text-xl md:text-start md:mx-1
+lg:text-2xl lg:text-start lg:mx-1
+font-Noto">Playground</div>
+<br />
+<div class="flex flex-wrap gap-1 justify-center md:justify-start items-stretch">
+    <div class="p-4 h-40 w-80 bg-white border border-cyan-100 rounded-lg shadow-sm shadow-purple-200 hover:shadow-cyan-400">
+        <a class="hover:cursor-pointer" [routerLink]="['/dca']">
+            <h5 class="text-2xl font-bold tracking-tight text-purple-600">DCA Model</h5>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <p>Calculate your historical returns if you were to adopt a dollar cost averaging method to your investments</p>
+    </div>    
+    <div class="p-4 h-40 w-80 bg-white border border-cyan-100 rounded-lg shadow-sm shadow-purple-200 hover:shadow-cyan-400">
+        <a class="hover:cursor-pointer" [routerLink]="['/fire']">
+            <h5 class="text-2xl font-bold tracking-tight text-purple-600">FIRE</h5>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <p>Financial Independance Retire Early: Check out how much you need to have invest by what age to retire early</p>
+    </div>
+    <div class="p-4 h-40 w-80 bg-white border border-cyan-100 rounded-lg shadow-sm shadow-purple-200 hover:shadow-cyan-400">
+        <a class="hover:cursor-pointer" [routerLink]="['/construction']">
+            <h5 class="text-2xl font-bold tracking-tight text-purple-600">Stock Monkey</h5>
+        </a>
+        &nbsp;&nbsp;&nbsp;
+        <p>Let a monkey choose your stock portfolio.</p>
+    </div>
+</div> -->
+<br><br><br><br><br><br>
+
+   
+    <!-- ? TEMPLATES -->
+
+    <ng-template #noPortfolios>
+        <div class="grid grid-cols-2 sm:grid-cols-3 2xl:grid-cols-4 ">
+            <div
+                class="col-span-1 text-xl mx-auto sm:col-span-1 sm:text-3xl sm:mx-0 md:col-span-1 md:text-4xl lg:col-span-1 lg:text-5xl">
+                -</div>
+            <div
+                class="col-span-1 text-xl mx-auto sm:col-span-1 sm:text-3xl sm:mx-0 md:col-span-1 md:text-4xl lg:col-span-1 lg:text-5xl">
+                -</div>
+        </div>
+    </ng-template>
+
+    <ng-template #noTickers>
+
+        <div class="flex justify-between">
+            <div class="mb-3 font-Noto text-gray-800 flex-col">
+                <p>Symbols</p>
+                <p>Market Value</p>
+                <p>Total Change</p>
+                <p>% Change</p>
+            </div>
+            <div class="mb-3 font-Noto text-gray-800 flex-col">
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+                <p>-</p>
+            </div>
+        </div>
+    </ng-template>
+
+
+
+
+</div>
