@@ -208,7 +208,7 @@
                     </div>
                     <div
                         class="p-2 border rounded-lg shadow shadow-orange-100 hover:shadow-blue-100 flex flex-col justify-between">
-                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">AvgCost/share</h1>
+                        <h1 class="text-xs sm:text-lg font-bold tracking-tight text-blue-700">Avg cost/share</h1>
                         <p class="text-xs sm:text-2xl text-bold">{{avgCost|currency}}</p>
                     </div>
                     <div
@@ -217,21 +217,29 @@
                         <p class="text-xs sm:text-2xl text-bold">{{currentPrice|currency}}</p>
                     </div>
                     <div class="col-span-3 text-justify text-xs sm:text-base p-2">
-                        If you had invested 
-                        <span class="text-orange-500 underline">{{form.value.investAmount|currency}}</span> every 
-                        <span class="text-blue-500 underline">{{form.value.investInterval}} days</span> from 
-                        <span class="text-blue-500 underline">{{form.value.startDate| date}}</span> to 
-                        <span class="text-blue-500 underline">{{form.value.endDate| date}}</span> with 
-                        <span class="text-orange-500 underline">{{form.value.initialAmount|currency}}</span> initial investment in 
-                        <span class="text-purple-600 underline">{{form.value.ticker|uppercase}}</span> stock. You would own a total of
-                        <span class="text-orange-500 underline">{{totalShares|number : '1.2-3'}}</span> shares at an average price of
+                        If you had invested
+                        <span class="text-orange-500 underline">{{form.value.investAmount|currency}}</span> every
+                        <span class="text-blue-500 underline">{{form.value.investInterval}} days</span> from
+                        <span class="text-blue-500 underline">{{form.value.startDate| date}}</span> to
+                        <span class="text-blue-500 underline">{{form.value.endDate| date}}</span> with
+                        <span class="text-orange-500 underline">{{form.value.initialAmount|currency}}</span> initial
+                        investment in
+                        <span class="text-purple-600 underline">{{form.value.ticker|uppercase}}</span> stock. You would
+                        own a total of
+                        <span class="text-orange-500 underline">{{totalShares|number : '1.2-3'}}</span> shares at an
+                        average price of
                         <span class="text-orange-500 underline">{{avgCost|currency}}</span> per share.
                         <br><br>
                         At the current stock price of
-                        <span class="text-orange-500 underline">{{currentPrice|currency}}</span> per share you would you have
-                        <span>{{totalReturn > 0 ? 'made ' : 'lost '}}</span><span class="underline" [style.color]="totalReturn>0?'#84CC16':'#DC2626'">{{totalReturn|currency}}</span> on your total investment of 
-                        <span class="text-orange-500 underline">{{totalCost|currency}}</span>. That is an annualized return of 
-                        <span class="underline" [style.color]="annualizedReturn>0?'#84CC16':'#DC2626'">{{annualizedReturn|percent}}</span>.
+                        <span class="text-orange-500 underline">{{currentPrice|currency}}</span> per share you would you
+                        have
+                        <span>{{totalReturn > 0 ? 'made ' : 'lost '}}</span><span class="underline"
+                            [style.color]="totalReturn>0?'#84CC16':'#DC2626'">{{totalReturn|currency}}</span> on your
+                        total investment of
+                        <span class="text-orange-500 underline">{{totalCost|currency}}</span>. That is an annualized
+                        return of
+                        <span class="underline"
+                            [style.color]="annualizedReturn>0?'#84CC16':'#DC2626'">{{annualizedReturn|percent}}</span>.
                     </div>
                 </div>
             </div>
