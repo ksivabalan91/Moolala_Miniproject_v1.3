@@ -1,4 +1,4 @@
-# Moolala App v1.2
+# [Moolala App v1.3](https://moolala.online)
 
 Your companion app to track your stock portfolios and more
 
