@@ -7,7 +7,7 @@ read message
 echo ------ GIT COMMIT -----
 git commit -m "$message"
 echo ------ GIT PUSH -------
-git push origin master
+git push
 echo -----------------------
 echo --------- DONE --------
 echo -----------------------
