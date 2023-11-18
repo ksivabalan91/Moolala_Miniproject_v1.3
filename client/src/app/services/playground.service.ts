@@ -10,8 +10,8 @@ import { LineChart } from '../components/charts/Models/line-chart.model';
 
 export class PlaygroundService {
 
-  // serverUrl = 'http://localhost:8080/api/';
-  serverUrl = 'https://moola-la-production.up.railway.app/api/';
+  serverUrl = 'http://localhost:8080/api/';
+  // serverUrl = 'https://moola-la-production.up.railway.app/api/';
   constructor(private http: HttpClient) {}
 
   getDCAChart(dca: DCA){

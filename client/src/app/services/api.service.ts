@@ -13,8 +13,8 @@ export class ApiService {
   constructor(private http: HttpClient) {     
   }
 
-  // serverUrl = 'http://localhost:8080/api/';
-  serverUrl = 'https://moola-la-production.up.railway.app/api/';
+  serverUrl = 'http://localhost:8080/api/';
+  // serverUrl = 'https://moola-la-production.up.railway.app/api/';
 
   createNewUser(user: User) {
     return lastValueFrom(this.http.post(this.serverUrl + 'createnewuser', user))
