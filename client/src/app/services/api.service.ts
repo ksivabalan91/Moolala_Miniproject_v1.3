@@ -13,7 +13,8 @@ export class ApiService {
   constructor(private http: HttpClient) {     
   }
 
-  serverUrl = 'http://localhost:8080/api/';
+  serverUrl = 'http://host.docker.internal:8080/api/';
+  // serverUrl = 'http://localhost:8080/api/';
   // serverUrl = 'https://moola-la-production.up.railway.app/api/';
 
   createNewUser(user: User) {

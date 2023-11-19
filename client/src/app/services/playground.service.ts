@@ -10,7 +10,8 @@ import { LineChart } from '../components/charts/Models/line-chart.model';
 
 export class PlaygroundService {
 
-  serverUrl = 'http://localhost:8080/api/';
+  serverUrl = 'http://host.docker.internal:8080/api/';
+  // serverUrl = 'http://localhost:8080/api/';
   // serverUrl = 'https://moola-la-production.up.railway.app/api/';
   constructor(private http: HttpClient) {}
 
