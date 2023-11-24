@@ -2,7 +2,7 @@
 
 ## SQL
 ```
-docker run -d --rm --name mysql-container -p 30306:3306 -e MYSQL_ROOT_PASSWORD=password -e MYSQL_USER=root -e MYSQL_DATABASE=moolala -v sqldata:/var/lib/mysql ksivabalan91/mysql:231124-2242
+docker run -d --rm --name mysql-container -p 30306:3306 --env-file ./database/sql/.env -v sqldata:/var/lib/mysql ksivabalan91/mysql:231124-2242
 ```
 ### Run SQL CMD line
 ```
